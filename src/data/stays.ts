@@ -287,6 +287,7 @@ export const stays: StayDetail[] = [
         reviews: 1340,
         intro: "방콕 왓포 자격 보유, 정통 타이 테크닉으로 깊은 피로 해소.",
         photo: therapist4,
+        photos: [therapist4, therapist3, therapist1, therapist2],
         height: "160cm",
         personality: "정직 · 강한 압 · ESTJ",
         certifications: ["방콕 왓포 마사지 자격", "타이전통의학 디플로마"],
