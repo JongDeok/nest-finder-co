@@ -381,41 +381,41 @@ function StayDetailPage() {
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {stay.therapists.map((t) => {
                     const hasPhoto = !!t.photo;
+                    const profileSrc = hasPhoto ? t.photo! : therapistPlaceholder;
+                    const Wrapper: React.ElementType = hasPhoto ? "button" : "div";
                     return (
                       <li key={t.name}>
-                        <button
-                          type="button"
-                          onClick={() => setSelectedTherapist(t)}
-                          className="group flex w-full items-start gap-4 rounded-2xl border border-border bg-card p-4 text-left transition hover:border-primary hover:shadow-card"
+                        <Wrapper
+                          {...(hasPhoto
+                            ? {
+                                type: "button" as const,
+                                onClick: () => setSelectedTherapist(t),
+                              }
+                            : {})}
+                          className={`group flex w-full items-start gap-4 rounded-2xl border border-border bg-card p-4 text-left transition ${
+                            hasPhoto
+                              ? "cursor-pointer hover:border-primary hover:shadow-card"
+                              : "cursor-default"
+                          }`}
+                          aria-label={
+                            hasPhoto
+                              ? `${t.nickname} 프로필 상세 보기`
+                              : `${t.nickname} (사진 준비중)`
+                          }
                         >
                           <div className="relative shrink-0">
-                            <Avatar className="h-16 w-16 ring-2 ring-background">
-                              {hasPhoto ? (
-                                <AvatarImage
-                                  src={t.photo}
-                                  alt={`${t.nickname} 프로필 사진`}
-                                  className="object-cover"
-                                />
-                              ) : null}
-                              <AvatarFallback className="bg-primary-soft text-primary">
-                                <User className="h-7 w-7" />
-                              </AvatarFallback>
-                            </Avatar>
-                            <span
-                              className={`absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-background ${
-                                hasPhoto
-                                  ? "bg-primary text-primary-foreground"
-                                  : "bg-muted text-muted-foreground"
-                              }`}
-                              aria-label={hasPhoto ? "프로필 사진 등록됨" : "프로필 사진 미등록"}
-                              title={hasPhoto ? "프로필 사진 등록됨" : "프로필 사진 미등록"}
-                            >
-                              {hasPhoto ? (
-                                <Camera className="h-3 w-3" />
-                              ) : (
-                                <CameraOff className="h-3 w-3" />
-                              )}
-                            </span>
+                            <div className="h-16 w-16 overflow-hidden rounded-full bg-muted ring-2 ring-background">
+                              <img
+                                src={profileSrc}
+                                alt={
+                                  hasPhoto
+                                    ? `${t.nickname} 프로필 사진`
+                                    : "프로필 사진 준비중"
+                                }
+                                loading="lazy"
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
@@ -456,8 +456,10 @@ function StayDetailPage() {
                               ))}
                             </ul>
                           </div>
-                          <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" />
-                        </button>
+                          {hasPhoto && (
+                            <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" />
+                          )}
+                        </Wrapper>
                       </li>
                     );
                   })}
