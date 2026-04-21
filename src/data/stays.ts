@@ -22,6 +22,16 @@ export interface Review {
   content: string;
 }
 
+export interface Therapist {
+  name: string;
+  nickname: string;
+  experience: string;
+  specialty: string[];
+  rating: number;
+  reviews: number;
+  intro: string;
+}
+
 export interface StayDetail extends Stay {
   id: string;
   images: string[];
@@ -31,9 +41,40 @@ export interface StayDetail extends Stay {
   checkOut: string;
   amenities: string[];
   rooms: Room[];
+  therapists: Therapist[];
   reviewList: Review[];
   ratingBreakdown: { label: string; score: number }[];
 }
+
+const defaultTherapists: Therapist[] = [
+  {
+    name: "김지유",
+    nickname: "지유 관리사",
+    experience: "경력 8년",
+    specialty: ["아로마", "스웨디시", "림프 관리"],
+    rating: 4.9,
+    reviews: 892,
+    intro: "부드럽지만 정확한 압으로 전신의 긴장을 풀어드립니다. 아로마 블렌딩 전문.",
+  },
+  {
+    name: "이서아",
+    nickname: "서아 관리사",
+    experience: "경력 6년",
+    specialty: ["딥티슈", "근막 이완", "어깨·목"],
+    rating: 4.8,
+    reviews: 654,
+    intro: "운동 후 뭉친 근육과 만성 어깨 통증 케어가 전문입니다.",
+  },
+  {
+    name: "박하늘",
+    nickname: "하늘 관리사",
+    experience: "경력 10년",
+    specialty: ["타이마사지", "스트레칭", "체형 교정"],
+    rating: 4.9,
+    reviews: 1120,
+    intro: "방콕 본점 출신, 정통 타이 테크닉으로 깊은 피로까지 풀어드립니다.",
+  },
+];
 
 export const stays: StayDetail[] = [
   {
