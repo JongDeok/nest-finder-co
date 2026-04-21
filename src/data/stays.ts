@@ -2,6 +2,10 @@ import thai from "@/assets/shop-thai.jpg";
 import aroma from "@/assets/shop-aroma.jpg";
 import sports from "@/assets/shop-sports.jpg";
 import dry from "@/assets/shop-dry.jpg";
+import therapist1 from "@/assets/therapist-1.jpg";
+import therapist2 from "@/assets/therapist-2.jpg";
+import therapist3 from "@/assets/therapist-3.jpg";
+import therapist4 from "@/assets/therapist-4.jpg";
 import type { Stay } from "@/components/site/StayCard";
 
 export interface Room {
@@ -30,6 +34,18 @@ export interface Therapist {
   rating: number;
   reviews: number;
   intro: string;
+  /** 등록된 프로필 사진 (없으면 미등록 상태로 표시) */
+  photo?: string;
+  /** 키 (예: "165cm") */
+  height?: string;
+  /** MBTI / 성격 키워드 */
+  personality?: string;
+  /** 주요 자격/수상 */
+  certifications?: string[];
+  /** 가능 시간대 */
+  availableHours?: string;
+  /** 한 줄 캐치 카피 */
+  catchphrase?: string;
 }
 
 export interface StayDetail extends Stay {
