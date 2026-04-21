@@ -14,14 +14,7 @@ import {
   Sparkles,
   Check,
   Calendar,
-  User,
-  Camera,
-  CameraOff,
   ChevronRight,
-  Award,
-  Clock,
-  Ruler,
-  Smile,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -34,10 +27,17 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { getStayById, type StayDetail, type Room, type Therapist } from "@/data/stays";
+import therapistPlaceholder from "@/assets/therapist-placeholder.png";
 
 export const Route = createFileRoute("/stay/$stayId")({
   loader: ({ params }) => {
