@@ -14,10 +14,12 @@ import {
   Sparkles,
   Check,
   Calendar,
+  User,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { getStayById, type StayDetail, type Room } from "@/data/stays";
