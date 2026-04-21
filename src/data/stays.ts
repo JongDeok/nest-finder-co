@@ -22,6 +22,16 @@ export interface Review {
   content: string;
 }
 
+export interface Therapist {
+  name: string;
+  nickname: string;
+  experience: string;
+  specialty: string[];
+  rating: number;
+  reviews: number;
+  intro: string;
+}
+
 export interface StayDetail extends Stay {
   id: string;
   images: string[];
@@ -31,9 +41,40 @@ export interface StayDetail extends Stay {
   checkOut: string;
   amenities: string[];
   rooms: Room[];
+  therapists: Therapist[];
   reviewList: Review[];
   ratingBreakdown: { label: string; score: number }[];
 }
+
+const defaultTherapists: Therapist[] = [
+  {
+    name: "김지유",
+    nickname: "지유 관리사",
+    experience: "경력 8년",
+    specialty: ["아로마", "스웨디시", "림프 관리"],
+    rating: 4.9,
+    reviews: 892,
+    intro: "부드럽지만 정확한 압으로 전신의 긴장을 풀어드립니다. 아로마 블렌딩 전문.",
+  },
+  {
+    name: "이서아",
+    nickname: "서아 관리사",
+    experience: "경력 6년",
+    specialty: ["딥티슈", "근막 이완", "어깨·목"],
+    rating: 4.8,
+    reviews: 654,
+    intro: "운동 후 뭉친 근육과 만성 어깨 통증 케어가 전문입니다.",
+  },
+  {
+    name: "박하늘",
+    nickname: "하늘 관리사",
+    experience: "경력 10년",
+    specialty: ["타이마사지", "스트레칭", "체형 교정"],
+    rating: 4.9,
+    reviews: 1120,
+    intro: "방콕 본점 출신, 정통 타이 테크닉으로 깊은 피로까지 풀어드립니다.",
+  },
+];
 
 export const stays: StayDetail[] = [
   {
@@ -114,6 +155,35 @@ export const stays: StayDetail[] = [
         content: "운동 후 뭉친 근육이 시원하게 풀렸습니다. 압이 정말 좋아요.",
       },
     ],
+    therapists: [
+      {
+        name: "정하린",
+        nickname: "하린 관리사",
+        experience: "경력 9년",
+        specialty: ["아로마", "스웨디시", "페이셜"],
+        rating: 4.9,
+        reviews: 742,
+        intro: "섬세한 손길과 따뜻한 압으로 깊은 이완을 선사합니다.",
+      },
+      {
+        name: "문서윤",
+        nickname: "서윤 관리사",
+        experience: "경력 7년",
+        specialty: ["딥티슈", "근막 이완"],
+        rating: 4.8,
+        reviews: 531,
+        intro: "어깨·등 만성 통증에 강한 1:1 맞춤 케어 전문.",
+      },
+      {
+        name: "강예나",
+        nickname: "예나 관리사",
+        experience: "경력 11년",
+        specialty: ["아로마", "림프", "핫스톤"],
+        rating: 4.9,
+        reviews: 1024,
+        intro: "호텔 스파 출신, 풀코스 시그니처 케어가 시그니처입니다.",
+      },
+    ],
     ratingBreakdown: [
       { label: "청결도", score: 4.9 },
       { label: "관리사", score: 4.9 },
@@ -175,6 +245,35 @@ export const stays: StayDetail[] = [
         content: "깔끔하고 친절해요. 다만 예약이 자주 차서 미리 잡아야 해요.",
       },
     ],
+    therapists: [
+      {
+        name: "쏨차이",
+        nickname: "Somchai 관리사",
+        experience: "경력 12년",
+        specialty: ["타이마사지", "스트레칭"],
+        rating: 4.9,
+        reviews: 1340,
+        intro: "방콕 왓포 자격 보유, 정통 타이 테크닉으로 깊은 피로 해소.",
+      },
+      {
+        name: "나린",
+        nickname: "Narin 관리사",
+        experience: "경력 8년",
+        specialty: ["허브볼", "림프"],
+        rating: 4.7,
+        reviews: 612,
+        intro: "뜨거운 허브볼로 부종과 냉증을 풀어드립니다.",
+      },
+      {
+        name: "이수민",
+        nickname: "수민 관리사",
+        experience: "경력 6년",
+        specialty: ["타이", "발마사지"],
+        rating: 4.6,
+        reviews: 498,
+        intro: "발과 종아리 집중 케어가 특기입니다.",
+      },
+    ],
     ratingBreakdown: [
       { label: "청결도", score: 4.7 },
       { label: "관리사", score: 4.6 },
@@ -233,6 +332,35 @@ export const stays: StayDetail[] = [
         date: "2025.03.30",
         roomType: "핫스톤 릴렉싱 70분",
         content: "조용하고 시설이 깨끗해요. 분당에서 최고인 듯합니다.",
+      },
+    ],
+    therapists: [
+      {
+        name: "정유진",
+        nickname: "유진 관리사",
+        experience: "경력 10년",
+        specialty: ["핫스톤", "아로마"],
+        rating: 4.9,
+        reviews: 820,
+        intro: "현무암 핫스톤 케어 10년 경력, 디톡스 코스 전문.",
+      },
+      {
+        name: "한도연",
+        nickname: "도연 관리사",
+        experience: "경력 7년",
+        specialty: ["사우나 케어", "스웨디시"],
+        rating: 4.7,
+        reviews: 455,
+        intro: "사우나와 핫스톤 조합으로 몸 속 노폐물까지 케어합니다.",
+      },
+      {
+        name: "오세라",
+        nickname: "세라 관리사",
+        experience: "경력 5년",
+        specialty: ["림프", "페이셜"],
+        rating: 4.7,
+        reviews: 332,
+        intro: "얼굴 부종과 림프 순환에 특화된 케어 제공.",
       },
     ],
     ratingBreakdown: [
@@ -296,6 +424,35 @@ export const stays: StayDetail[] = [
         content: "기념일에 커플코스로 다녀왔는데 너무 만족했어요!",
       },
     ],
+    therapists: [
+      {
+        name: "최서아",
+        nickname: "서아 관리사",
+        experience: "경력 9년",
+        specialty: ["아로마", "커플 케어"],
+        rating: 5.0,
+        reviews: 512,
+        intro: "오션뷰 룸의 분위기를 가장 잘 살리는 시그니처 관리사.",
+      },
+      {
+        name: "윤지호",
+        nickname: "지호 관리사",
+        experience: "경력 8년",
+        specialty: ["딥티슈", "스포츠"],
+        rating: 4.8,
+        reviews: 389,
+        intro: "바디 전체의 균형을 잡아주는 정밀 케어 전문.",
+      },
+      {
+        name: "배하영",
+        nickname: "하영 관리사",
+        experience: "경력 6년",
+        specialty: ["페이셜", "아로마"],
+        rating: 4.9,
+        reviews: 261,
+        intro: "피부 진정과 페이셜 케어가 특기입니다.",
+      },
+    ],
     ratingBreakdown: [
       { label: "청결도", score: 4.9 },
       { label: "관리사", score: 4.8 },
@@ -349,6 +506,35 @@ export const stays: StayDetail[] = [
         content: "헬스 후에 가면 회복 속도가 진짜 빨라져요. 위치도 좋습니다.",
       },
     ],
+    therapists: [
+      {
+        name: "김태웅",
+        nickname: "태웅 관리사",
+        experience: "경력 11년",
+        specialty: ["스포츠", "재활"],
+        rating: 4.8,
+        reviews: 1820,
+        intro: "국가공인 자격 보유, 운동선수 출신 재활 전문.",
+      },
+      {
+        name: "박정현",
+        nickname: "정현 관리사",
+        experience: "경력 9년",
+        specialty: ["체형교정", "근막"],
+        rating: 4.7,
+        reviews: 1012,
+        intro: "틀어진 체형과 만성 통증을 잡아드립니다.",
+      },
+      {
+        name: "이도윤",
+        nickname: "도윤 관리사",
+        experience: "경력 6년",
+        specialty: ["스트레칭", "근막"],
+        rating: 4.6,
+        reviews: 540,
+        intro: "운동 후 회복 케어와 스트레칭 코칭을 함께 제공.",
+      },
+    ],
     ratingBreakdown: [
       { label: "청결도", score: 4.7 },
       { label: "관리사", score: 4.6 },
@@ -391,6 +577,35 @@ export const stays: StayDetail[] = [
         date: "2025.04.09",
         roomType: "무드 아로마 50분",
         content: "인테리어가 진짜 예뻐요. 향도 좋고 가격도 합리적입니다.",
+      },
+    ],
+    therapists: [
+      {
+        name: "장지민",
+        nickname: "지민 관리사",
+        experience: "경력 5년",
+        specialty: ["아로마", "감성 케어"],
+        rating: 4.6,
+        reviews: 612,
+        intro: "시그니처 블렌딩 오일로 무드 있는 힐링 타임.",
+      },
+      {
+        name: "서나연",
+        nickname: "나연 관리사",
+        experience: "경력 4년",
+        specialty: ["스웨디시", "페이셜"],
+        rating: 4.5,
+        reviews: 438,
+        intro: "부드러운 압과 향으로 처음 마사지도 부담 없어요.",
+      },
+      {
+        name: "권유리",
+        nickname: "유리 관리사",
+        experience: "경력 6년",
+        specialty: ["림프", "두피"],
+        rating: 4.5,
+        reviews: 389,
+        intro: "두피와 어깨 집중 케어가 특기입니다.",
       },
     ],
     ratingBreakdown: [
@@ -444,6 +659,35 @@ export const stays: StayDetail[] = [
         content: "노천 온천 후 받는 아로마 마사지 조합이 환상적이에요!",
       },
     ],
+    therapists: [
+      {
+        name: "문재희",
+        nickname: "재희 관리사",
+        experience: "경력 13년",
+        specialty: ["아로마", "스파 패키지"],
+        rating: 4.9,
+        reviews: 1230,
+        intro: "호텔 스파 13년차, 온천+케어 풀패키지 전문.",
+      },
+      {
+        name: "홍지아",
+        nickname: "지아 관리사",
+        experience: "경력 9년",
+        specialty: ["림프", "바디"],
+        rating: 4.8,
+        reviews: 742,
+        intro: "노천 온천 후 림프 케어로 디톡스 마무리.",
+      },
+      {
+        name: "백서진",
+        nickname: "서진 관리사",
+        experience: "경력 7년",
+        specialty: ["페이셜", "두피"],
+        rating: 4.8,
+        reviews: 512,
+        intro: "피부와 두피 진정 케어 전문.",
+      },
+    ],
     ratingBreakdown: [
       { label: "청결도", score: 4.8 },
       { label: "관리사", score: 4.8 },
@@ -486,6 +730,35 @@ export const stays: StayDetail[] = [
         date: "2025.04.06",
         roomType: "서퍼 회복 60분",
         content: "서핑 후 들렀는데 진짜 회복이 빨라요. 사장님도 친절하십니다.",
+      },
+    ],
+    therapists: [
+      {
+        name: "강해솔",
+        nickname: "해솔 관리사",
+        experience: "경력 6년",
+        specialty: ["스포츠", "아로마"],
+        rating: 4.8,
+        reviews: 312,
+        intro: "서퍼 출신, 어깨와 등 회복 케어가 시그니처.",
+      },
+      {
+        name: "주민호",
+        nickname: "민호 관리사",
+        experience: "경력 5년",
+        specialty: ["근막", "스트레칭"],
+        rating: 4.7,
+        reviews: 224,
+        intro: "운동 후 근막 이완과 스트레칭 코칭을 함께.",
+      },
+      {
+        name: "임수아",
+        nickname: "수아 관리사",
+        experience: "경력 4년",
+        specialty: ["아로마", "페이셜"],
+        rating: 4.6,
+        reviews: 168,
+        intro: "부드러운 손길로 여행 피로를 풀어드립니다.",
       },
     ],
     ratingBreakdown: [
