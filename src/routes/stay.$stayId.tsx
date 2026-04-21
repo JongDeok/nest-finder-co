@@ -101,6 +101,9 @@ function StayDetailPage() {
   const [activeImage, setActiveImage] = useState(0);
   const [liked, setLiked] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(0);
+  const [selectedTherapist, setSelectedTherapist] = useState<Therapist | null>(null);
+
+  const registeredCount = stay.therapists.filter((t) => !!t.photo).length;
 
   const handleReserve = (room: Room) => {
     toast.success(`${room.name} 예약 요청이 접수되었습니다`, {
