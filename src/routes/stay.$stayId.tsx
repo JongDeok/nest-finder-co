@@ -15,14 +15,29 @@ import {
   Check,
   Calendar,
   User,
+  Camera,
+  CameraOff,
+  ChevronRight,
+  Award,
+  Clock,
+  Ruler,
+  Smile,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { getStayById, type StayDetail, type Room } from "@/data/stays";
+import { getStayById, type StayDetail, type Room, type Therapist } from "@/data/stays";
 
 export const Route = createFileRoute("/stay/$stayId")({
   loader: ({ params }) => {
