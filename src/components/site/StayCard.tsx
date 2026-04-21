@@ -72,7 +72,7 @@ export function StayCard({ stay }: { stay: Stay }) {
           )}
           <span className="text-lg font-extrabold text-foreground">
             {stay.price.toLocaleString()}
-            <span className="text-xs font-medium text-muted-foreground">원</span>
+            <span className="text-xs font-medium text-muted-foreground">원~</span>
           </span>
           {stay.originalPrice && (
             <span className="text-xs text-muted-foreground line-through">

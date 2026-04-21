@@ -1,13 +1,13 @@
-import jeju from "@/assets/dest-jeju.jpg";
-import busan from "@/assets/dest-busan.jpg";
-import gangneung from "@/assets/dest-gangneung.jpg";
-import gyeongju from "@/assets/dest-gyeongju.jpg";
+import gangnam from "@/assets/region-gangnam.jpg";
+import hongdae from "@/assets/region-hongdae.jpg";
+import busan from "@/assets/region-busan.jpg";
+import bundang from "@/assets/region-bundang.jpg";
 
 const destinations = [
-  { name: "제주", count: "12,480", image: jeju },
-  { name: "부산", count: "8,210", image: busan },
-  { name: "강릉", count: "4,930", image: gangneung },
-  { name: "경주", count: "3,712", image: gyeongju },
+  { name: "강남·역삼", count: "1,820", image: gangnam },
+  { name: "홍대·합정", count: "942", image: hongdae },
+  { name: "해운대", count: "612", image: busan },
+  { name: "분당·판교", count: "541", image: bundang },
 ];
 
 export function Destinations() {
@@ -16,10 +16,10 @@ export function Destinations() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mb-6">
           <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-            지금 인기 여행지
+            지금 인기 지역
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            여행객들이 가장 많이 찾는 도시
+            가장 많이 예약되는 마사지 핫플레이스
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -31,7 +31,7 @@ export function Destinations() {
             >
               <img
                 src={d.image}
-                alt={`${d.name} 여행지`}
+                alt={`${d.name} 지역 마사지샵`}
                 loading="lazy"
                 width={800}
                 height={800}
@@ -40,7 +40,7 @@ export function Destinations() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4 text-left">
                 <h3 className="text-xl font-extrabold text-white">{d.name}</h3>
-                <p className="text-xs text-white/85">숙소 {d.count}개</p>
+                <p className="text-xs text-white/85">샵 {d.count}개</p>
               </div>
             </button>
           ))}

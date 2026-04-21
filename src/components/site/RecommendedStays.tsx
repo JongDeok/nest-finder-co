@@ -2,7 +2,7 @@ import { useState } from "react";
 import { StayCard } from "./StayCard";
 import { stays } from "@/data/stays";
 
-const tabs = ["전체", "호텔·리조트", "모텔", "펜션", "풀빌라"] as const;
+const tabs = ["전체", "스웨디시", "타이마사지", "스포츠", "스파·사우나"] as const;
 
 export function RecommendedStays() {
   const [active, setActive] = useState<(typeof tabs)[number]>("전체");
@@ -12,10 +12,10 @@ export function RecommendedStays() {
       <div className="mb-6 flex items-end justify-between">
         <div>
           <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-            오늘의 추천 숙소
+            오늘의 추천 마사지샵
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            지금 가장 인기 있는 숙소를 만나보세요
+            지금 가장 인기 있는 샵을 만나보세요
           </p>
         </div>
         <button

@@ -10,16 +10,16 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "여기어때 — 지금, 여기 어때? 국내·해외 숙박 최저가 예약" },
+      { title: "힐링타임 — 지금, 어디서 받을까? 전국 마사지샵 최저가 예약" },
       {
         name: "description",
         content:
-          "호텔, 모텔, 펜션, 풀빌라까지. 오늘의 특가와 인기 여행지를 한눈에. 여기어때에서 합리적인 가격으로 예약하세요.",
+          "스웨디시, 타이마사지, 아로마, 스포츠, 1인샵까지. 오늘의 특가와 인기 샵을 한눈에. 힐링타임에서 합리적인 가격으로 예약하세요.",
       },
-      { property: "og:title", content: "여기어때 — 지금, 여기 어때?" },
+      { property: "og:title", content: "힐링타임 — 지금, 어디서 받을까?" },
       {
         property: "og:description",
-        content: "국내 호텔·모텔·펜션·풀빌라 최저가 예약, 오늘의 특가와 인기 여행지.",
+        content: "전국 스웨디시·타이·아로마·스포츠 마사지 최저가 예약, 오늘의 특가와 인기 지역.",
       },
     ],
   }),

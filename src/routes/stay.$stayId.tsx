@@ -31,9 +31,9 @@ export const Route = createFileRoute("/stay/$stayId")({
   head: ({ loaderData }) => {
     const s = loaderData as StayDetail | undefined;
     if (!s) {
-      return { meta: [{ title: "숙소를 찾을 수 없습니다 — 여기어때" }] };
+      return { meta: [{ title: "샵을 찾을 수 없습니다 — 힐링타임" }] };
     }
-    const title = `${s.name} — 여기어때`;
+    const title = `${s.name} — 힐링타임`;
     const desc = `${s.location} · ${s.type} · ${s.price.toLocaleString()}원부터. ${s.description.slice(0, 90)}`;
     return {
       meta: [
@@ -48,8 +48,8 @@ export const Route = createFileRoute("/stay/$stayId")({
   },
   notFoundComponent: () => (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background px-4 text-center">
-      <h1 className="text-3xl font-bold">숙소를 찾을 수 없어요</h1>
-      <p className="text-muted-foreground">요청하신 숙소가 존재하지 않거나 삭제되었습니다.</p>
+      <h1 className="text-3xl font-bold">샵을 찾을 수 없어요</h1>
+      <p className="text-muted-foreground">요청하신 마사지샵이 존재하지 않거나 삭제되었습니다.</p>
       <Link to="/" className="text-sm font-semibold text-primary hover:underline">
         홈으로 돌아가기 →
       </Link>
@@ -62,16 +62,21 @@ const amenityIcon: Record<string, React.ComponentType<{ className?: string }>> =
   "무료 Wi-Fi": Wifi,
   "발렛 주차": Car,
   "주차 가능": Car,
-  "주차장": Car,
-  "전기차 충전": Car,
-  "수영장": Waves,
-  "인피니티 풀": Waves,
-  "야외 자쿠지": Waves,
+  주차장: Car,
+  샤워실: Waves,
   "노천 온천": Waves,
-  "스파 욕조": Waves,
-  "피트니스": Dumbbell,
-  "조식 뷔페": Coffee,
+  사우나: Waves,
+  "적외선 사우나": Waves,
+  "야외 샤워실": Waves,
+  핫스톤: Sparkles,
+  허브볼: Sparkles,
+  "웰컴 티": Coffee,
+  "허브 티": Coffee,
+  "웰컴 샴페인": Coffee,
   "조식 제공": Coffee,
+  라운지: Coffee,
+  "프리미엄 라운지": Coffee,
+  "운동복 대여": Dumbbell,
 };
 
 function StayDetailPage() {
@@ -82,7 +87,7 @@ function StayDetailPage() {
 
   const handleReserve = (room: Room) => {
     toast.success(`${room.name} 예약 요청이 접수되었습니다`, {
-      description: `${stay.name} · ${room.price.toLocaleString()}원 / 1박`,
+      description: `${stay.name} · ${room.price.toLocaleString()}원 / 1회`,
     });
   };
 
@@ -116,7 +121,7 @@ function StayDetailPage() {
             className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground"
           >
             <ChevronLeft className="h-4 w-4" />
-            추천 숙소로 돌아가기
+            추천 마사지샵으로 돌아가기
           </Link>
           <div className="flex items-center gap-2">
             <button
@@ -207,19 +212,19 @@ function StayDetailPage() {
           <div className="space-y-10">
             {/* Description */}
             <section>
-              <h2 className="text-lg font-bold text-foreground">숙소 소개</h2>
+              <h2 className="text-lg font-bold text-foreground">샵 소개</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {stay.description}
               </p>
               <div className="mt-4 flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-2">
                   <Calendar className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">체크인</span>
+                  <span className="font-semibold">영업 시작</span>
                   <span className="text-muted-foreground">{stay.checkIn}</span>
                 </div>
                 <div className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-2">
                   <Calendar className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">체크아웃</span>
+                  <span className="font-semibold">영업 종료</span>
                   <span className="text-muted-foreground">{stay.checkOut}</span>
                 </div>
               </div>
@@ -246,7 +251,7 @@ function StayDetailPage() {
 
             {/* Rooms */}
             <section>
-              <h2 className="text-lg font-bold text-foreground">객실 선택</h2>
+              <h2 className="text-lg font-bold text-foreground">코스 선택</h2>
               <div className="mt-4 space-y-3">
                 {stay.rooms.map((room, i) => {
                   const discount = room.originalPrice
@@ -300,7 +305,7 @@ function StayDetailPage() {
                               {room.price.toLocaleString()}
                             </span>
                           </div>
-                          <div className="text-[11px] text-muted-foreground">/ 1박</div>
+                          <div className="text-[11px] text-muted-foreground">/ 1회</div>
                         </div>
                       </div>
                     </button>
@@ -403,12 +408,12 @@ function StayDetailPage() {
           {/* Reservation sidebar */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-2xl border border-border bg-card p-5 shadow-card">
-              <div className="text-xs text-muted-foreground">선택한 객실</div>
+              <div className="text-xs text-muted-foreground">선택한 코스</div>
               <div className="mt-1 text-base font-bold text-foreground">
                 {stay.rooms[selectedRoom].name}
               </div>
               <div className="mt-4 flex items-baseline justify-between border-t border-border pt-4">
-                <span className="text-sm text-muted-foreground">1박 요금</span>
+                <span className="text-sm text-muted-foreground">1회 요금</span>
                 <div className="text-right">
                   {stay.rooms[selectedRoom].originalPrice && (
                     <div className="text-xs text-muted-foreground line-through">
@@ -438,7 +443,7 @@ function StayDetailPage() {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
           <div>
-            <div className="text-[11px] text-muted-foreground">1박부터</div>
+            <div className="text-[11px] text-muted-foreground">1회부터</div>
             <div className="text-lg font-extrabold text-foreground">
               {stay.rooms[selectedRoom].price.toLocaleString()}
               <span className="text-xs font-medium text-muted-foreground">원</span>
