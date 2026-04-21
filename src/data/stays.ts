@@ -34,8 +34,10 @@ export interface Therapist {
   rating: number;
   reviews: number;
   intro: string;
-  /** 등록된 프로필 사진 (없으면 미등록 상태로 표시) */
+  /** 대표 프로필 사진 (없으면 미등록 상태로 표시) */
   photo?: string;
+  /** 추가 사진들 (모달에서 슬라이드로 노출). photo 1장만 등록된 경우 비워둘 수 있음 */
+  photos?: string[];
   /** 키 (예: "165cm") */
   height?: string;
   /** MBTI / 성격 키워드 */
@@ -181,6 +183,7 @@ export const stays: StayDetail[] = [
         reviews: 742,
         intro: "섬세한 손길과 따뜻한 압으로 깊은 이완을 선사합니다.",
         photo: therapist1,
+        photos: [therapist1, therapist2, therapist3],
         height: "163cm",
         personality: "차분 · 꼼꼼 · ENFJ",
         certifications: ["국가공인 피부미용사", "아로마테라피 1급", "림프 드레나쥬 수료"],
@@ -196,6 +199,7 @@ export const stays: StayDetail[] = [
         reviews: 531,
         intro: "어깨·등 만성 통증에 강한 1:1 맞춤 케어 전문.",
         photo: therapist2,
+        photos: [therapist2, therapist4],
         height: "168cm",
         personality: "꼼꼼 · 강한 압 · ISTJ",
         certifications: ["스포츠마사지 1급", "근막이완 워크샵 수료"],
@@ -283,6 +287,7 @@ export const stays: StayDetail[] = [
         reviews: 1340,
         intro: "방콕 왓포 자격 보유, 정통 타이 테크닉으로 깊은 피로 해소.",
         photo: therapist4,
+        photos: [therapist4, therapist3, therapist1, therapist2],
         height: "160cm",
         personality: "정직 · 강한 압 · ESTJ",
         certifications: ["방콕 왓포 마사지 자격", "타이전통의학 디플로마"],
