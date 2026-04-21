@@ -1,7 +1,9 @@
 import { Heart, Star } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 export interface Stay {
+  id?: string;
   image: string;
   badge?: string;
   type: string;
@@ -19,7 +21,7 @@ export function StayCard({ stay }: { stay: Stay }) {
     ? Math.round((1 - stay.price / stay.originalPrice) * 100)
     : 0;
 
-  return (
+  const cardInner = (
     <article className="group cursor-pointer overflow-hidden rounded-2xl bg-card transition hover:-translate-y-1">
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted">
         <img
@@ -81,4 +83,13 @@ export function StayCard({ stay }: { stay: Stay }) {
       </div>
     </article>
   );
+
+  if (stay.id) {
+    return (
+      <Link to="/stay/$stayId" params={{ stayId: stay.id }} className="block">
+        {cardInner}
+      </Link>
+    );
+  }
+  return cardInner;
 }
