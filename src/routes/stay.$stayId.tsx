@@ -15,14 +15,29 @@ import {
   Check,
   Calendar,
   User,
+  Camera,
+  CameraOff,
+  ChevronRight,
+  Award,
+  Clock,
+  Ruler,
+  Smile,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { getStayById, type StayDetail, type Room } from "@/data/stays";
+import { getStayById, type StayDetail, type Room, type Therapist } from "@/data/stays";
 
 export const Route = createFileRoute("/stay/$stayId")({
   loader: ({ params }) => {
@@ -86,6 +101,9 @@ function StayDetailPage() {
   const [activeImage, setActiveImage] = useState(0);
   const [liked, setLiked] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(0);
+  const [selectedTherapist, setSelectedTherapist] = useState<Therapist | null>(null);
+
+  const registeredCount = stay.therapists.filter((t) => !!t.photo).length;
 
   const handleReserve = (room: Room) => {
     toast.success(`${room.name} 예약 요청이 접수되었습니다`, {
@@ -347,59 +365,102 @@ function StayDetailPage() {
 
               {/* TAB: 관리사 */}
               <TabsContent value="therapists" className="mt-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-lg font-bold text-foreground">
-                    소속 관리사 ({stay.therapists.length})
-                  </h2>
-                  <span className="text-xs text-muted-foreground">
+                <div className="mb-4 flex items-end justify-between gap-3">
+                  <div>
+                    <h2 className="text-lg font-bold text-foreground">
+                      소속 관리사 ({stay.therapists.length})
+                    </h2>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      프로필 사진 등록 {registeredCount} / {stay.therapists.length}명 · 카드를 누르면 상세 정보를 볼 수 있어요
+                    </p>
+                  </div>
+                  <span className="hidden text-xs text-muted-foreground sm:inline">
                     예약 시 지정 가능
                   </span>
                 </div>
-                <ul className="space-y-3">
-                  {stay.therapists.map((t) => (
-                    <li
-                      key={t.name}
-                      className="rounded-2xl border border-border bg-card p-4"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary-soft">
-                          <User className="h-6 w-6 text-primary" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex flex-wrap items-baseline gap-2">
-                            <h3 className="text-base font-bold text-foreground">
-                              {t.nickname}
-                            </h3>
-                            <span className="text-xs text-muted-foreground">
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {stay.therapists.map((t) => {
+                    const hasPhoto = !!t.photo;
+                    return (
+                      <li key={t.name}>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedTherapist(t)}
+                          className="group flex w-full items-start gap-4 rounded-2xl border border-border bg-card p-4 text-left transition hover:border-primary hover:shadow-card"
+                        >
+                          <div className="relative shrink-0">
+                            <Avatar className="h-16 w-16 ring-2 ring-background">
+                              {hasPhoto ? (
+                                <AvatarImage
+                                  src={t.photo}
+                                  alt={`${t.nickname} 프로필 사진`}
+                                  className="object-cover"
+                                />
+                              ) : null}
+                              <AvatarFallback className="bg-primary-soft text-primary">
+                                <User className="h-7 w-7" />
+                              </AvatarFallback>
+                            </Avatar>
+                            <span
+                              className={`absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-background ${
+                                hasPhoto
+                                  ? "bg-primary text-primary-foreground"
+                                  : "bg-muted text-muted-foreground"
+                              }`}
+                              aria-label={hasPhoto ? "프로필 사진 등록됨" : "프로필 사진 미등록"}
+                              title={hasPhoto ? "프로필 사진 등록됨" : "프로필 사진 미등록"}
+                            >
+                              {hasPhoto ? (
+                                <Camera className="h-3 w-3" />
+                              ) : (
+                                <CameraOff className="h-3 w-3" />
+                              )}
+                            </span>
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className="text-base font-bold text-foreground">
+                                {t.nickname}
+                              </h3>
+                              {hasPhoto ? (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-primary-soft px-1.5 py-0.5 text-[10px] font-bold text-primary">
+                                  <Check className="h-2.5 w-2.5" />
+                                  실사 인증
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-bold text-muted-foreground">
+                                  사진 준비중
+                                </span>
+                              )}
+                            </div>
+                            <div className="mt-0.5 text-xs text-muted-foreground">
                               {t.experience}
-                            </span>
+                            </div>
+                            <div className="mt-1 flex items-center gap-1 text-xs">
+                              <Star className="h-3.5 w-3.5 fill-warning text-warning" />
+                              <span className="font-bold text-foreground">
+                                {t.rating.toFixed(1)}
+                              </span>
+                              <span className="text-muted-foreground">
+                                · 리뷰 {t.reviews.toLocaleString()}
+                              </span>
+                            </div>
+                            <ul className="mt-2 flex flex-wrap gap-1">
+                              {t.specialty.slice(0, 3).map((s) => (
+                                <li
+                                  key={s}
+                                  className="inline-flex items-center rounded-full bg-secondary px-2 py-0.5 text-[11px] font-semibold text-foreground"
+                                >
+                                  #{s}
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          <div className="mt-1 flex items-center gap-1 text-xs">
-                            <Star className="h-3.5 w-3.5 fill-warning text-warning" />
-                            <span className="font-bold text-foreground">
-                              {t.rating.toFixed(1)}
-                            </span>
-                            <span className="text-muted-foreground">
-                              · 리뷰 {t.reviews.toLocaleString()}
-                            </span>
-                          </div>
-                          <p className="mt-2 text-sm leading-relaxed text-foreground">
-                            {t.intro}
-                          </p>
-                          <ul className="mt-2 flex flex-wrap gap-1.5">
-                            {t.specialty.map((s) => (
-                              <li
-                                key={s}
-                                className="inline-flex items-center rounded-full bg-secondary px-2 py-0.5 text-[11px] font-semibold text-foreground"
-                              >
-                                #{s}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
+                          <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" />
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </TabsContent>
 
@@ -532,6 +593,162 @@ function StayDetailPage() {
           </Button>
         </div>
       </div>
+
+      {/* 관리사 상세 모달 */}
+      <Dialog
+        open={!!selectedTherapist}
+        onOpenChange={(open) => !open && setSelectedTherapist(null)}
+      >
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
+          {selectedTherapist && (
+            <>
+              <DialogHeader className="sr-only">
+                <DialogTitle>{selectedTherapist.nickname} 프로필</DialogTitle>
+                <DialogDescription>{selectedTherapist.intro}</DialogDescription>
+              </DialogHeader>
+
+              <div className="-mx-6 -mt-6">
+                <div className="relative h-40 overflow-hidden bg-gradient-to-br from-primary-soft to-accent">
+                  {selectedTherapist.photo ? (
+                    <img
+                      src={selectedTherapist.photo}
+                      alt=""
+                      className="h-full w-full object-cover opacity-40"
+                    />
+                  ) : null}
+                </div>
+                <div className="relative -mt-12 flex flex-col items-center px-6">
+                  <Avatar className="h-24 w-24 ring-4 ring-background">
+                    {selectedTherapist.photo ? (
+                      <AvatarImage
+                        src={selectedTherapist.photo}
+                        alt={`${selectedTherapist.nickname} 프로필 사진`}
+                        className="object-cover"
+                      />
+                    ) : null}
+                    <AvatarFallback className="bg-primary-soft text-primary">
+                      <User className="h-10 w-10" />
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="mt-3 flex items-center gap-2">
+                    <h3 className="text-xl font-extrabold text-foreground">
+                      {selectedTherapist.nickname}
+                    </h3>
+                    {selectedTherapist.photo ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-primary-foreground">
+                        <Check className="h-2.5 w-2.5" />
+                        실사 인증
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-bold text-muted-foreground">
+                        <CameraOff className="h-2.5 w-2.5" />
+                        사진 준비중
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-1 text-xs text-muted-foreground">
+                    {selectedTherapist.experience}
+                  </div>
+                  <div className="mt-1.5 flex items-center gap-1 text-sm">
+                    <Star className="h-4 w-4 fill-warning text-warning" />
+                    <span className="font-bold text-foreground">
+                      {selectedTherapist.rating.toFixed(1)}
+                    </span>
+                    <span className="text-muted-foreground">
+                      · 리뷰 {selectedTherapist.reviews.toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {selectedTherapist.catchphrase && (
+                <p className="mt-4 rounded-xl bg-secondary px-4 py-3 text-center text-sm font-semibold text-foreground">
+                  “{selectedTherapist.catchphrase}”
+                </p>
+              )}
+
+              <div className="grid grid-cols-2 gap-2">
+                {selectedTherapist.height && (
+                  <div className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs">
+                    <Ruler className="h-3.5 w-3.5 text-primary" />
+                    <span className="text-muted-foreground">키</span>
+                    <span className="ml-auto font-bold text-foreground">
+                      {selectedTherapist.height}
+                    </span>
+                  </div>
+                )}
+                {selectedTherapist.personality && (
+                  <div className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs">
+                    <Smile className="h-3.5 w-3.5 text-primary" />
+                    <span className="ml-auto font-bold text-foreground">
+                      {selectedTherapist.personality}
+                    </span>
+                  </div>
+                )}
+                {selectedTherapist.availableHours && (
+                  <div className="col-span-2 flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs">
+                    <Clock className="h-3.5 w-3.5 text-primary" />
+                    <span className="text-muted-foreground">예약 가능 시간</span>
+                    <span className="ml-auto font-bold text-foreground">
+                      {selectedTherapist.availableHours}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <h4 className="text-sm font-bold text-foreground">소개</h4>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  {selectedTherapist.intro}
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-bold text-foreground">전문 분야</h4>
+                <ul className="mt-1.5 flex flex-wrap gap-1.5">
+                  {selectedTherapist.specialty.map((s) => (
+                    <li
+                      key={s}
+                      className="inline-flex items-center rounded-full bg-primary-soft px-2.5 py-1 text-xs font-semibold text-primary"
+                    >
+                      #{s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {selectedTherapist.certifications && selectedTherapist.certifications.length > 0 && (
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">자격 / 수료</h4>
+                  <ul className="mt-1.5 space-y-1">
+                    {selectedTherapist.certifications.map((c) => (
+                      <li key={c} className="flex items-center gap-2 text-xs text-foreground">
+                        <Award className="h-3.5 w-3.5 text-primary" />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <Button
+                className="mt-2 h-12 w-full rounded-xl text-base font-bold"
+                onClick={() => {
+                  toast.success(
+                    `${selectedTherapist.nickname} 지정 예약 요청이 접수되었습니다`,
+                    {
+                      description: `${stay.name} · ${stay.rooms[selectedRoom].name}`,
+                    },
+                  );
+                  setSelectedTherapist(null);
+                }}
+              >
+                이 관리사로 예약하기
+              </Button>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
