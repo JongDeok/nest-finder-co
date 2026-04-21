@@ -34,8 +34,10 @@ export interface Therapist {
   rating: number;
   reviews: number;
   intro: string;
-  /** 등록된 프로필 사진 (없으면 미등록 상태로 표시) */
+  /** 대표 프로필 사진 (없으면 미등록 상태로 표시) */
   photo?: string;
+  /** 추가 사진들 (모달에서 슬라이드로 노출). photo 1장만 등록된 경우 비워둘 수 있음 */
+  photos?: string[];
   /** 키 (예: "165cm") */
   height?: string;
   /** MBTI / 성격 키워드 */
