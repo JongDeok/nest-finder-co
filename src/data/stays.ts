@@ -91,7 +91,7 @@ export const stays: StayDetail[] = [
         benefits: ["전용 버틀러", "리무진 픽업", "다이닝 크레딧"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "민지***",
         rating: 5.0,
@@ -159,7 +159,7 @@ export const stays: StayDetail[] = [
         benefits: ["월풀 스파", "PS5 + 빔프로젝터", "와인 1병"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "하늘***",
         rating: 4.7,
@@ -219,7 +219,7 @@ export const stays: StayDetail[] = [
         benefits: ["전용 수영장", "노래방 무료", "BBQ 풀세트"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "준영***",
         rating: 4.9,
@@ -280,7 +280,7 @@ export const stays: StayDetail[] = [
         benefits: ["프라이빗 풀", "BBQ 풀세트", "공항 픽업"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "서윤***",
         rating: 5.0,
@@ -340,7 +340,7 @@ export const stays: StayDetail[] = [
         benefits: ["조식 2인 포함", "레이트 체크아웃"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "민수***",
         rating: 4.6,
@@ -384,7 +384,7 @@ export const stays: StayDetail[] = [
         benefits: ["넷플릭스 무료"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "지민***",
         rating: 4.5,
@@ -435,7 +435,7 @@ export const stays: StayDetail[] = [
         benefits: ["키즈 어메니티", "씨메르 4인", "조식 4인"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "유진***",
         rating: 4.9,
@@ -479,7 +479,7 @@ export const stays: StayDetail[] = [
         benefits: ["서프보드 1개", "조식 2인"],
       },
     ],
-    reviews: [
+    reviewList: [
       {
         user: "태양***",
         rating: 4.7,
