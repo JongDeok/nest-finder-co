@@ -31,7 +31,7 @@ export interface StayDetail extends Stay {
   checkOut: string;
   amenities: string[];
   rooms: Room[];
-  reviews: Review[];
+  reviewList: Review[];
   ratingBreakdown: { label: string; score: number }[];
 }
 
