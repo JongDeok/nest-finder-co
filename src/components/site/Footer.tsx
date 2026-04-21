@@ -4,9 +4,9 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
-            <div className="text-xl font-extrabold text-primary">여기어때</div>
+            <div className="text-xl font-extrabold text-primary">힐링타임</div>
             <p className="mt-2 text-xs text-muted-foreground">
-              여행이 필요한 모든 순간, 여기어때
+              오늘의 피로를 푸는 가장 빠른 방법, 힐링타임
             </p>
           </div>
           <div>
@@ -20,22 +20,22 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-bold text-foreground">서비스</h4>
             <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
-              <li>국내숙소</li>
-              <li>해외숙소</li>
-              <li>항공·티켓</li>
+              <li>마사지 예약</li>
+              <li>스파·사우나</li>
+              <li>왁싱·뷰티</li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-bold text-foreground">회사</h4>
+            <h4 className="text-sm font-bold text-foreground">제휴</h4>
             <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
-              <li>회사 소개</li>
-              <li>제휴·광고 문의</li>
+              <li>샵 등록 안내</li>
+              <li>광고·제휴 문의</li>
               <li>채용</li>
             </ul>
           </div>
         </div>
         <div className="mt-10 border-t border-border pt-6 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} 여기어때 클론. 학습용 데모 프로젝트입니다.
+          © {new Date().getFullYear()} 힐링타임. 학습용 데모 프로젝트입니다.
         </div>
       </div>
     </footer>

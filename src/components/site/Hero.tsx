@@ -1,5 +1,5 @@
 import { Calendar, MapPin, Search, Users } from "lucide-react";
-import heroImg from "@/assets/hero-hotel.jpg";
+import heroImg from "@/assets/hero-spa.jpg";
 
 export function Hero() {
   return (
@@ -7,7 +7,7 @@ export function Hero() {
       <div className="absolute inset-0 -z-10">
         <img
           src={heroImg}
-          alt="도심 야경이 보이는 호텔 객실"
+          alt="아늑한 조명의 프리미엄 마사지샵 룸"
           width={1920}
           height={1024}
           className="h-full w-full object-cover"
@@ -22,13 +22,13 @@ export function Hero() {
       <div className="mx-auto flex max-w-7xl flex-col items-center px-4 pb-10 pt-20 sm:px-6 md:pb-20 md:pt-32">
         <div className="text-center">
           <p className="text-sm font-semibold tracking-wide text-white/90 sm:text-base">
-            오늘 떠나도 좋은 여행
+            오늘의 피로, 지금 바로 풀자
           </p>
           <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
-            지금, 여기 어때?
+            지금, 어디서 받을까?
           </h1>
           <p className="mt-3 text-base text-white/85 sm:text-lg">
-            국내 호텔·모텔·펜션·풀빌라 최저가 예약
+            전국 마사지·스웨디시·타이·스포츠 마사지 최저가 예약
           </p>
         </div>
 
@@ -38,10 +38,10 @@ export function Hero() {
             <label className="sm:col-span-5 flex items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-muted">
               <MapPin className="h-5 w-5 text-primary" />
               <div className="flex-1">
-                <div className="text-xs font-semibold text-muted-foreground">여행지</div>
+                <div className="text-xs font-semibold text-muted-foreground">지역</div>
                 <input
                   type="text"
-                  placeholder="도시, 지역, 숙소명 검색"
+                  placeholder="지역, 지하철역, 샵 이름 검색"
                   className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
                 />
               </div>
@@ -49,15 +49,15 @@ export function Hero() {
             <label className="sm:col-span-4 flex items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-muted">
               <Calendar className="h-5 w-5 text-primary" />
               <div className="flex-1">
-                <div className="text-xs font-semibold text-muted-foreground">일정</div>
-                <div className="text-sm text-foreground">4월 25일 - 4월 26일</div>
+                <div className="text-xs font-semibold text-muted-foreground">방문일</div>
+                <div className="text-sm text-foreground">오늘 · 4월 21일</div>
               </div>
             </label>
             <label className="sm:col-span-2 flex items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-muted">
               <Users className="h-5 w-5 text-primary" />
               <div className="flex-1">
                 <div className="text-xs font-semibold text-muted-foreground">인원</div>
-                <div className="text-sm text-foreground">성인 2명</div>
+                <div className="text-sm text-foreground">성인 1명</div>
               </div>
             </label>
             <button

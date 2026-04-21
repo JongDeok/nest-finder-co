@@ -7,23 +7,23 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-1">
-            <span className="text-2xl font-extrabold tracking-tight text-primary">여기어때</span>
+            <span className="text-2xl font-extrabold tracking-tight text-primary">힐링타임</span>
           </Link>
           <nav className="hidden items-center gap-6 md:flex">
             <Link to="/" className="text-sm font-medium text-foreground hover:text-primary">
-              국내숙소
+              마사지샵
             </Link>
             <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary">
-              해외숙소
+              스웨디시
             </a>
             <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary">
-              항공
+              타이마사지
             </a>
             <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary">
-              티켓·투어
+              스포츠
             </a>
             <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary">
-              렌터카
+              건마·1인샵
             </a>
           </nav>
         </div>
@@ -38,7 +38,7 @@ export function Header() {
           <button
             type="button"
             className="hidden rounded-full p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground sm:inline-flex"
-            aria-label="찜한 숙소"
+            aria-label="찜한 샵"
           >
             <Heart className="h-5 w-5" />
           </button>
