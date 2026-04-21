@@ -134,22 +134,17 @@ export function RecommendedStays() {
         ))}
       </div>
 
-      {/* Mobile: paged horizontal swipe, 2 cards per page */}
+      {/* Mobile: paged horizontal swipe, 1 large card per page */}
       <div className="md:hidden">
-        <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2">
-          {Array.from({ length: Math.ceil(stays.length / 2) }).map((_, pageIdx) => {
-            const pair = stays.slice(pageIdx * 2, pageIdx * 2 + 2);
-            return (
-              <div
-                key={pageIdx}
-                className="grid w-full flex-none snap-center grid-cols-2 gap-3"
-              >
-                {pair.map((s, i) => (
-                  <StayCard key={`${s.name}-${i}`} stay={s} />
-                ))}
-              </div>
-            );
-          })}
+        <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2">
+          {stays.map((s, i) => (
+            <div
+              key={`${s.name}-${i}`}
+              className="w-[78%] flex-none snap-center sm:w-[60%]"
+            >
+              <StayCard stay={s} />
+            </div>
+          ))}
         </div>
       </div>
 
