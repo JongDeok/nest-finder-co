@@ -26,13 +26,13 @@ const promos = [
 
 export function PromoBanner() {
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-4 sm:px-6">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <section className="pb-4 md:mx-auto md:max-w-7xl md:px-6">
+      <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0">
         {promos.map((p) => (
           <button
             key={p.title}
             type="button"
-            className="group relative overflow-hidden rounded-2xl p-6 text-left shadow-card transition hover:-translate-y-1 hover:shadow-pop"
+            className="group relative w-[85%] flex-none snap-center overflow-hidden rounded-2xl p-6 text-left shadow-card transition hover:-translate-y-1 hover:shadow-pop md:w-auto"
             style={{ background: p.bg, color: p.fg }}
           >
             <div className="flex items-center gap-1.5 text-xs font-bold opacity-90">
